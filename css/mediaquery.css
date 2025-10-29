@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* ====== MOBILE FIRST -> expand to larger screens ====== */
+
+/* >= 768px (tablets) */
+@media (min-width: 768px) {
+  .hero-grid{grid-template-columns: 1fr 440px; align-items:center; gap:40px}
+  .hero-content{text-align:left}
+  .destaques{justify-content:flex-start}
+  .cards-grid{grid-template-columns:repeat(2,1fr)}
+  .insta-grid{grid-template-columns:repeat(3,1fr)}
+  .booking-grid{grid-template-columns:1fr 360px;align-items:start}
+  .form .row{grid-template-columns:1fr 1fr}
+  .about-grid{grid-template-columns:380px 1fr;gap:30px}
+  .nav-list{gap:18px}
+  .btn-burger{display:none}
+  .main-nav .nav-list{display:flex}
+}
+
+/* >= 992px (desktop) */
+@media (min-width: 992px) {
+  .container{max-width:1180px}
+  .hero-content h2{font-size:38px}
+  .insta-grid img{height:260px}
+  .cards-grid{grid-template-columns:repeat(3,1fr)}
+  .testimonials-grid{grid-template-columns:repeat(3,1fr)}
+  .footer-grid{grid-template-columns:1fr 200px 200px}
+  .brand-logo{width:70px}
+}
+
+/* >= 1200px (large) */
+@media (min-width: 1200px) {
+  .hero-grid{grid-template-columns:1fr 520px}
+  .hero{padding:80px 0}
+  .container{max-width:1280px}
+}
