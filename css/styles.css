@@ -67,7 +67,7 @@ body{
 .nav-list a { text-decoration:none; color:var(--texto); padding:8px 10px; border-radius:8px }
 .nav-list a:hover{background: var(--dourado);color: var(--branco)}
 .nav-list.open { opacity:1; visibility:visible; transform:scale(1) }
-.ul
+
 
 /* hambúrguer (padrão mobile) */
 .btn-burger {
