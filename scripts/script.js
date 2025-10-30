@@ -1,5 +1,5 @@
 // CONFIGURAÇÕES: cole sua URL do Google Apps Script e, se necessário, atualize o número do WhatsApp
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWs5rJT39KIY9Gk6A_-ysE2WXMnoqcbOpH6ZhYYbzLha4_AkmXSmGj8Ygyokn7Qwdp_Q/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZy1BDgqE9mefWJrTTCVNBldlufnO93fK9Bq68qmFZxJ77j1QzTm2elQIJ_BsH7fPPCw/exec";
 const WHATSAPP_NUM = "5519983557755";
 
 // preenchimento do ano
@@ -42,7 +42,7 @@ form?.addEventListener('submit', async (ev) => {
     const obs = document.getElementById('obs').value.trim();
 
     if (!SCRIPT_URL || SCRIPT_URL.startsWith("COLE_AQUI")) {
-    alert("URL do script não configurada. Cole a URL do Google Apps Script em SCRIPT_URL no código.");
+    alert("https://script.google.com/macros/s/AKfycbzZy1BDgqE9mefWJrTTCVNBldlufnO93fK9Bq68qmFZxJ77j1QzTm2elQIJ_BsH7fPPCw/exec");
     btn.disabled = false;
     btn.textContent = 'Agendar';
     return;
