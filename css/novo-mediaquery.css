@@ -1,0 +1,189 @@
+/* =======================================================
+   MEDIA QUERY — ROSA • Unhas e Cabelo
+   Correção do menu hambúrguer e layout responsivo
+   Baseado em min-width
+   ======================================================= */
+
+/* ==============================
+   MOBILE (até 767px)
+   ============================== */
+@media (max-width: 767px) {
+  /* Mostrar o botão hamburger */
+  .btn-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .btn-burger span {
+    height: 3px;
+    width: 100%;
+    background: var(--rosa-escuro, #c085a5);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* Efeito ao abrir */
+  .btn-burger[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  .btn-burger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .btn-burger[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  /* MENU recolhido no mobile */
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    width: 220px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .main-nav.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .main-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .main-nav a {
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .main-nav a:hover {
+    color: var(--rosa-escuro, #c085a5);
+  }
+
+  /* Ajustes de layout geral */
+  .hero-grid,
+  .about-grid,
+  .booking-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==============================
+   TABLET E DESKTOP (>=768px)
+   ============================== */
+@media (min-width: 768px) {
+  /* Esconde o botão hamburguer */
+  .btn-burger {
+    display: none;
+  }
+
+  /* Mostra o menu normal */
+  .main-nav {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    width: auto;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .main-nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 0;
+  }
+
+  .main-nav a {
+    color: var(--cor-texto, #222);
+  }
+
+  /* Layouts em colunas */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 40px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+}
+
+/* ==============================
+   GRANDES TELAS (>=1200px)
+   ============================== */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
+
+  .hero h2 {
+    font-size: 2.4rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
