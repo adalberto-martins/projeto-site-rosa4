@@ -65,7 +65,9 @@ body{
   list-style: none;
 }
 .nav-list a { text-decoration:none; color:var(--texto); padding:8px 10px; border-radius:8px }
+.nav-list a:hover{background: var(--dourado);color: var(--branco)}
 .nav-list.open { opacity:1; visibility:visible; transform:scale(1) }
+.ul
 
 /* hambúrguer (padrão mobile) */
 .btn-burger {
@@ -123,7 +125,7 @@ body{
 .form-message{margin-top:12px;font-weight:600}
 
 /* aside cards */
-.info-card, .contact-card{background:var(--branco);padding:12px;border-radius:12px;box-shadow:var(--card-shadow);margin-bottom:10px}
+.info-card, .contact-card{background:var(--branco);padding:22px;border-radius:12px;box-shadow:var(--card-shadow);margin-bottom:10px}
 
 /* ====== TESTIMONIALS ====== */
 .testimonials-grid{display:grid;grid-template-columns:1fr;gap:12px}
