@@ -1,27 +1,38 @@
 @charset "UTF-8";
 
-/* ====== MOBILE FIRST -> expand to larger screens ====== */
+/* ====== MOBILE-FIRST -> ativar estilos para telas maiores com min-width ====== */
 
 /* >= 768px (tablets) */
 @media (min-width: 768px) {
-  .hero-grid{grid-template-columns: 1fr 440px; align-items:center; gap:40px}
-  .hero-content{text-align:left}
-  .destaques{justify-content:flex-start}
+  .hero-grid{grid-template-columns:1fr 360px;gap:24px;align-items:center}
   .cards-grid{grid-template-columns:repeat(2,1fr)}
   .insta-grid{grid-template-columns:repeat(3,1fr)}
-  .booking-grid{grid-template-columns:1fr 360px;align-items:start}
+  .booking-grid{grid-template-columns:1fr 320px;align-items:start}
   .form .row{grid-template-columns:1fr 1fr}
-  .about-grid{grid-template-columns:380px 1fr;gap:30px}
-  .nav-list{gap:18px}
-  .btn-burger{display:none}
-  .main-nav .nav-list{display:flex}
+  .about-grid{grid-template-columns:260px 1fr;gap:24px}
 }
 
-/* >= 992px (desktop) */
+/* >= 992px (desktop) - menu horizontal aparece aqui */
 @media (min-width: 992px) {
-  .container{max-width:1180px}
+  .main-nav {
+    position: static;
+    background: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    gap: 22px;
+    padding: 0;
+  }
+
+  .btn-burger { display: none }
+
+  .hero-grid{grid-template-columns:1fr 440px}
   .hero-content h2{font-size:38px}
-  .insta-grid img{height:260px}
   .cards-grid{grid-template-columns:repeat(3,1fr)}
   .testimonials-grid{grid-template-columns:repeat(3,1fr)}
   .footer-grid{grid-template-columns:1fr 200px 200px}
@@ -31,6 +42,6 @@
 /* >= 1200px (large) */
 @media (min-width: 1200px) {
   .hero-grid{grid-template-columns:1fr 520px}
-  .hero{padding:80px 0}
   .container{max-width:1280px}
+  .footer-map iframe{ max-width:420px; height:200px }
 }
