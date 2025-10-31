@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste de Agendamento — Rosa</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fef6f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 { color: #c85a8f; }
+    form {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 360px;
+      width: 100%;
+    }
+    label { display: block; margin-top: 10px; }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #ffd580;
+      color: #333;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover { background: #f5c04f; }
+    .msg {
+      margin-top: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Teste de Agendamento</h1>
+  <form id="formTeste">
+    <label>Nome:</label>
+    <input type="text" id="nome" value="Teste Rosa">
+
+    <label>Telefone:</label>
+    <input type="tel" id="telefone" value="19983557755">
+
+    <label>Serviço:</label>
+    <select id="servico">
+      <option value="Unhas">Unhas</option>
+      <option value="Cabelos">Cabelos</option>
+    </select>
+
+    <label>Data e hora:</label>
+    <input type="datetime-local" id="data" value="2025-11-01T10:00">
+
+    <label>Observações:</label>
+    <textarea id="obs" rows="2">Teste automático</textarea>
+
+    <button type="submit">Enviar Teste</button>
+    <div class="msg" id="msg"></div>
+  </form>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFQT72vRs4qGhM-XfjYfshg_8mu-M0geUqvmR319l3IcrObeVyQxVxymDhJfMxfmil8g/exec"; // sua URL
+
+    document.getElementById('formTeste').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = document.getElementById('msg');
+      msg.textContent = "⏳ Enviando...";
+
+      const payload = {
+        nome: document.getElementById('nome').value,
+        telefone: document.getElementById('telefone').value,
+        servico: document.getElementById('servico').value,
+        data: document.getElementById('data').value,
+        obs: document.getElementById('obs').value
+      };
+
+      try {
+        const res = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+        msg.textContent = "✅ " + (result.message || "Sucesso!");
+        msg.style.color = "green";
+      } catch (err) {
+        msg.textContent = "❌ Erro de conexão: " + err;
+        msg.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>
