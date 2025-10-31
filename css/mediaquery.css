@@ -34,7 +34,7 @@
     justify-content: space-between;
     width: 28px;
     height: 20px;
-    background: blueviolet;
+    background: none;
     border: none;
     cursor: pointer;
     z-index: 1000;
@@ -117,9 +117,16 @@
     grid-template-columns: 1fr;
   }
 
-  .lightbox .nav-btn { font-size: 32px; padding: 6px 10px; }
-  .lightbox .close-btn { font-size: 26px; }
-  .lightbox .caption { font-size: 0.9rem; max-width: 90%; }
+  .lightbox .nav-btn { 
+    font-size: 32px;
+    padding: 6px 10px;
+  }
+  .lightbox .close-btn { 
+    font-size: 26px;
+  }
+  .lightbox .caption { 
+    font-size: 0.9em;
+    max-width: 90%; }
   
   @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
