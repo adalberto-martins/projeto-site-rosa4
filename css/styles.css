@@ -431,6 +431,10 @@ a {
   color:#d9534f;
 }
 
+div.card.info-card ol li {
+  list-style: none;
+}
+
 /* Aside cards */
 .info-card,.contact-card {
   background:linear-gradient(90deg,Var(--rosa-claro));
@@ -582,6 +586,8 @@ span {
     opacity: 0.9;
     transform: translateY(-2px);
 }
+
+
 
 /* Small screens adjustments (override minor) */
 @media (max-width:420px){
