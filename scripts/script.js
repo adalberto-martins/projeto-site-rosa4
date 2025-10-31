@@ -6,7 +6,7 @@
    ==================================================== */
 
 /* ====== CONFIGURAÇÕES (substitua antes de publicar) ====== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZy1BDgqE9mefWJrTTCVNBldlufnO93fK9Bq68qmFZxJ77j1QzTm2elQIJ_BsH7fPPCw/exec"; // ex: https://script.google.com/macros/s/AKfy.../exec
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6oax1hWsGonYMFgEDi8f46D9-ejQWoMjhFOLCKx1JsAyVgQ0GTS1jCWD0FEtGWkCHLQ/exec"; // ex: https://script.google.com/macros/s/AKfy.../exec
 const WHATSAPP_NUM = "5519983557755"; // número internacional sem + (ex: 5511999999999)
 
 /* ====== Helpers ====== */
@@ -141,3 +141,88 @@ if (form) {
     }
   });
 }
+
+/* ====== LIGHTBOX GALERIA COMPLETA ====== */
+document.addEventListener("DOMContentLoaded", () => {
+  const imagens = document.querySelectorAll(".zoomable");
+  if (imagens.length === 0) return;
+
+  let currentIndex = 0;
+  const lightbox = document.createElement("div");
+  lightbox.classList.add("lightbox");
+  lightbox.innerHTML = `
+    <span class="close-btn" aria-label="Fechar imagem">&times;</span>
+    <span class="nav-btn prev" aria-label="Anterior">❮</span>
+    <img src="" alt="Imagem ampliada">
+    <span class="nav-btn next" aria-label="Próxima">❯</span>
+    <div class="caption"></div>
+  `;
+  document.body.appendChild(lightbox);
+
+  const lightboxImg = lightbox.querySelector("img");
+  const caption = lightbox.querySelector(".caption");
+  const closeBtn = lightbox.querySelector(".close-btn");
+  const btnPrev = lightbox.querySelector(".prev");
+  const btnNext = lightbox.querySelector(".next");
+
+  function abrirLightbox(index) {
+    currentIndex = index;
+    const imgAtual = imagens[currentIndex];
+    lightboxImg.src = imgAtual.src;
+    caption.textContent = imgAtual.alt || "";
+    lightbox.classList.add("active");
+  }
+
+  function fecharLightbox() {
+    lightbox.classList.remove("active");
+    setTimeout(() => {
+      lightboxImg.src = "";
+      caption.textContent = "";
+    }, 300);
+  }
+
+  function mostrarProxima() {
+    currentIndex = (currentIndex + 1) % imagens.length;
+    const imgAtual = imagens[currentIndex];
+    lightboxImg.src = imgAtual.src;
+    caption.textContent = imgAtual.alt || "";
+  }
+
+  function mostrarAnterior() {
+    currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+    const imgAtual = imagens[currentIndex];
+    lightboxImg.src = imgAtual.src;
+    caption.textContent = imgAtual.alt || "";
+  }
+
+  imagens.forEach((img, index) => {
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => abrirLightbox(index));
+  });
+
+  closeBtn.addEventListener("click", fecharLightbox);
+  btnNext.addEventListener("click", mostrarProxima);
+  btnPrev.addEventListener("click", mostrarAnterior);
+
+  // Fecha clicando fora
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) fecharLightbox();
+  });
+
+  // Teclado
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("active")) return;
+    if (e.key === "ArrowRight") mostrarProxima();
+    if (e.key === "ArrowLeft") mostrarAnterior();
+    if (e.key === "Escape") fecharLightbox();
+  });
+
+  // Swipe mobile
+  let startX = 0;
+  lightbox.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
+  lightbox.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) mostrarProxima();
+    if (endX - startX > 50) mostrarAnterior();
+  });
+});
