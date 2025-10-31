@@ -144,6 +144,95 @@ a{color:inherit;text-decoration:none}
 .insta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .insta-grid img{width:100%;height:180px;object-fit:cover;border-radius:10px;transition:transform var(--transition)}
 
+/* ====== LIGHTBOX GALERIA ====== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  z-index: 9999;
+}
+
+.lightbox.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(255, 255, 255, 0.3);
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.lightbox.active img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ====== LEGENDA ====== */
+.lightbox .caption {
+  margin-top: 12px;
+  color: #f8f8f8;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px 16px;
+  border-radius: 8px;
+  max-width: 80%;
+  line-height: 1.4;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Botão fechar */
+.lightbox .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 50%;
+  padding: 5px 12px;
+  transition: all 0.3s ease;
+}
+.lightbox .close-btn:hover {
+  background: rgba(255, 213, 128, 0.8); /* dourado */
+  color: #222;
+}
+
+/* Setas de navegação */
+.lightbox .nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+.lightbox .nav-btn:hover {
+  background: rgba(255, 213, 128, 0.8);
+  color: #222;
+}
+.lightbox .nav-btn.prev { left: 25px; }
+.lightbox .nav-btn.next { right: 25px; }
+
 /* BOOKING */
 .booking-grid{display:grid;grid-template-columns:1fr;gap:14px}
 .booking-form{background:#fff;padding:14px;border-radius:12px;box-shadow:var(--card-shadow)}
@@ -174,7 +263,7 @@ a{color:inherit;text-decoration:none}
 
 /* MAP */
 .footer-map{text-align:center;margin-top:18px}
-.footer-map h5{font-family:"Playfair Display",serif;color:var(--rosa-strong);margin-bottom:6px}
+.footer-map h5{font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--rosa-escuro);font-size:1.2em}
 .footer-map p{color:rgba(46,46,56,0.8);margin-bottom:8px}
 .footer-map iframe{width:100%;max-width:320px;height:160px;border:0;border-radius:10px;box-shadow:0 8px 30px rgba(46,46,56,0.06)}
 
