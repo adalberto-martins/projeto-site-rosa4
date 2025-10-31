@@ -1,50 +1,183 @@
 @charset "UTF-8";
 
-/* Typical Device Breakpoints
-------------------------------
-Pequenas telas: até 600px
-Celular: de 600px até 768px
-Tablet: 768px até 992px
-Desktop: 992px até 1200px
-Grandes telas: acima de 1200px
-*/
+/* ===========================================================
+   MEDIA QUERY — ROSA • Unhas e Cabelo
+   Estrutura adaptada aos breakpoints padrão do projeto
+   =========================================================== */
 
-@media print { /* IMPRESSÃO */
+/* ------------------------------
+   IMPRESSÃO
+------------------------------ */
+@media print {
   * {
     font-family: 'Courier New', Courier, monospace;
-  }      
+  }
 }
 
-@media screen and (min-width: 768px) and (max-width: 992px) {/* TABLET */
-  .hero-grid {
-    grid-template-columns:1fr 360px;
-    gap:24px;
-    align-items:center;
+/* ------------------------------
+   PEQUENAS TELAS (até 768px)
+------------------------------ */
+@media screen and (max-width: 768px) {
+  /* MENU HAMBURGUER */
+  .main-nav {
+    position: relative;
+  }
+  .nav-list a {
+    color: var(--texto, #333);
+    padding: 10px 0;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .btn-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: blueviolet;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .btn-burger span {
+    height: 3px;
+    width: 100%;
+    background: var(--rosa-escuro, #c085a5);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* Efeito ao abrir */
+  .btn-burger[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  .btn-burger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .btn-burger[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  /* MENU recolhido no mobile */
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    width: 220px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .main-nav.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .main-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .main-nav a {
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .main-nav a:hover {
+    color: var(--rosa-escuro, #c085a5);
+  }
+
+  /* GRID E LAYOUT MOBILE */
+  .hero-grid,
+  .about-grid,
+  .booking-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
   }
 
   .cards-grid {
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns: 1fr;
   }
 
   .insta-grid {
-    grid-template-columns:repeat(3,1fr);
-  }
-  .booking-grid {
-    grid-template-columns:1fr 320px;
-    align-items:start;
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .form .row {
-    grid-template-columns:1fr 1fr;
-  }
-
-  .about-grid {
-    grid-template-columns:260px 1fr;
-    gap:24px;
+  .testimonials-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-@media screen and (min-width: 992px) and (max-width:1200px) { /* DESKTOP */
+/* ------------------------------
+   TABLET (768px até 992px)
+------------------------------ */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .btn-burger {
+    display: none;
+  }
+
+  .main-nav {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    width: auto;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .insta-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .booking-grid {
+    grid-template-columns: 1fr 320px;
+    align-items: start;
+  }
+
+  .form .row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+  }
+}
+
+/* ------------------------------
+   DESKTOP (992px até 1200px)
+------------------------------ */
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .btn-burger {
+    display: none;
+  }
+
   .main-nav {
     position: static;
     background: none;
@@ -61,44 +194,48 @@ Grandes telas: acima de 1200px
   }
 
   .hero-grid {
-    grid-template-columns:1fr 440px;
+    grid-template-columns: 1fr 440px;
   }
 
   .hero-content h2 {
-    font-size:38px;
+    font-size: 38px;
   }
+
   .cards-grid {
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .testimonials-grid {
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .footer-grid {
-    grid-template-columns:1fr 200px 200px;
+    grid-template-columns: 1fr 200px 200px;
   }
 
   .brand-logo {
-    width:70px;
+    width: 70px;
   }
 }
 
-@media screen and (min-width: 1200px) {/* GRANDES TELAS */
+/* ------------------------------
+   GRANDES TELAS (acima de 1200px)
+------------------------------ */
+@media screen and (min-width: 1200px) {
   .main-nav {
     display: block;
   }
-  
-  .hero-grid{
-    grid-template-columns:1fr 520px;
+
+  .hero-grid {
+    grid-template-columns: 1fr 520px;
   }
 
-  .container{
-    max-width:1280px;
-  }
-  .footer-map iframe{ 
-    max-width:420px;
-    height:200px;
+  .container {
+    max-width: 1280px;
   }
 
+  .footer-map iframe {
+    max-width: 420px;
+    height: 200px;
+  }
 }
