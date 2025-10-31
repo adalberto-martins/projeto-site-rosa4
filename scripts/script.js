@@ -6,7 +6,7 @@
    ==================================================== */
 
 /* ====== CONFIGURAÇÕES (substitua antes de publicar) ====== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6oax1hWsGonYMFgEDi8f46D9-ejQWoMjhFOLCKx1JsAyVgQ0GTS1jCWD0FEtGWkCHLQ/exec"; // ex: https://script.google.com/macros/s/AKfy.../exec
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXacxVbUj1mejGRbxqGnGvjgWCoRMnqpYFoQOXcY6WGv0zX-bWtthtwTxtsgg6gJy9cQ/exec"; // ex: https://script.google.com/macros/s/AKfy.../exec
 const WHATSAPP_NUM = "5519983557755"; // número internacional sem + (ex: 5511999999999)
 
 /* ====== Helpers ====== */
