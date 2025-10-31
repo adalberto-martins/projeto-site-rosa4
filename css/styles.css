@@ -185,7 +185,7 @@ a {
 }
 .hero-content h2 {
   font-family:"Playfair Display",serif;
-  font-size:28px;
+  font-size:34px;
   margin-bottom:8px;
 }
 .lead {
@@ -224,7 +224,8 @@ a {
   padding:44px 0;
 }
 .section h3.section-title {
-  text-align:left;
+  font-size: 3em;
+  text-align:center;
   margin-bottom:18px;
   font-family:"Playfair Display",serif;
 }
@@ -255,7 +256,7 @@ a {
   gap:14px;
 }
 .card {
-  background:#fff;
+  background:var(--dourado);
   padding:14px;
   border-radius:12px;
   box-shadow:var(--card-shadow);
@@ -284,6 +285,7 @@ a {
   border-radius:10px;
   transition:transform var(--transition);
 }
+
 
 /* ====== LIGHTBOX GALERIA ====== */
 .lightbox {
@@ -385,7 +387,7 @@ a {
   gap:14px;
 }
 .booking-form {
-  background:#fff;
+  background:linear-gradient(90deg,var(--rosa));
   padding:14px;
   border-radius:12px;
   box-shadow:var(--card-shadow);
@@ -431,7 +433,7 @@ a {
 
 /* Aside cards */
 .info-card,.contact-card {
-  background:#fff;
+  background:linear-gradient(90deg,Var(--rosa-claro));
   padding:12px;
   border-radius:12px;
   box-shadow:var(--card-shadow);
@@ -445,7 +447,7 @@ a {
   gap:12px;
 }
 .testimonials-grid blockquote {
-  background:#fff;
+  background: #c6a6f0;;
   padding:14px;
   border-radius:12px;
   box-shadow:var(--card-shadow);
@@ -480,6 +482,7 @@ a {
   padding:6px 0;
 }
 .footer-social .socials a {
+  font-size: 1.6em;
   text-decoration:none;
   color:var(--texto);
   margin-right:10px;
@@ -496,7 +499,7 @@ a {
   text-transform:uppercase;
   letter-spacing:0.5px;
   color:var(--rosa-escuro);
-  font-size:1.2em;
+  font-size:1.8em;
 }
 .footer-map p {
   color:rgba(46,46,56,0.8);
@@ -549,6 +552,35 @@ a {
 .muted {
   color:rgba(46,46,56,0.6);
   font-size:14px;
+}
+
+span {
+  font-weight: 900;
+  background: linear-gradient(90deg,var(--dourado), var(--pessego));
+  color: black;
+}
+
+.rota-btn {
+    margin-top: 12px;
+    text-align: center;
+    background: linear-gradient(90deg,var(--lilas), var(--rosa));
+}
+
+.btn-rota {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--azul), var(--verde));
+    color: var(--branco);
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.btn-rota:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
 }
 
 /* Small screens adjustments (override minor) */
