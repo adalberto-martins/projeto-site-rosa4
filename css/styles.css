@@ -587,7 +587,80 @@ span {
     transform: translateY(-2px);
 }
 
+/* ==========================================================
+   LIGHTBOX — Exibição ampliada das imagens da galeria
+   ==========================================================
+   Este bloco cria um efeito de tela cheia quando o usuário
+   clica em uma imagem com a classe .zoomable.
+========================================================== */
 
+#lightbox {
+  position: fixed;
+  inset: 0; /* substitui top, right, bottom, left */
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+#lightbox.active {
+  display: flex;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Conteúdo central da imagem */
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: zoomIn 0.4s ease;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+  background: #fff;
+}
+
+/* Botão de fechar (X) */
+.lightbox-close {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  font-size: 2.2rem;
+  color: var(--cor-destaque);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.lightbox-close:hover {
+  transform: scale(1.2);
+  color: #fff;
+}
+
+/* Animações suaves */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
 /* Small screens adjustments (override minor) */
 @media (max-width:420px){
@@ -599,5 +672,176 @@ span {
   }
   .about-photo img {
     width:180px;
+  }
+}
+
+/* ==========================================================
+   ANIMAÇÕES DE ENTRADA (SCROLL REVEAL)
+   ==========================================================
+   Efeito de aparição suave conforme o usuário rola a página.
+   O script.js adiciona automaticamente a classe .in-view
+   quando o elemento entra na área visível da tela.
+========================================================== */
+
+/* Estado inicial (fora de vista) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+/* Quando o elemento entra na tela */
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   VARIAÇÕES OPCIONAIS (EFEITOS MAIS SUAVES)
+   ========================================================== */
+
+/* Fade + leve brilho dourado — perfeito para botões e títulos */
+.reveal.in-view {
+  box-shadow: 0 0 0 transparent;
+  animation: glowFade 1.2s ease forwards;
+}
+
+/* Animação de brilho dourado sutil */
+@keyframes glowFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+    box-shadow: 0 0 0 transparent;
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+/* ==========================================================
+   VARIAÇÃO ESPECIAL PARA IMAGENS
+   ========================================================== */
+.reveal.img-fade {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.reveal.img-fade.in-view {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.8s ease;
+}
+
+/* ==========================================================
+   REVEAL VARIAÇÕES — efeitos adicionais de entrada suave
+   ==========================================================
+   Use junto com .reveal para controlar a direção e estilo.
+   Exemplo:
+     <div class="reveal fade-left"> ... </div>
+========================================================== */
+
+/* Fade vindo da esquerda */
+.reveal.fade-left {
+  transform: translateX(-40px);
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+.reveal.fade-left.in-view {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Fade vindo da direita */
+.reveal.fade-right {
+  transform: translateX(40px);
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+.reveal.fade-right.in-view {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Fade vindo de cima */
+.reveal.fade-up {
+  transform: translateY(-40px);
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+.reveal.fade-up.in-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Fade vindo de baixo (padrão) */
+.reveal.fade-down {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+.reveal.fade-down.in-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Zoom-in (crescendo suavemente) */
+.reveal.zoom-in {
+  transform: scale(0.92);
+  opacity: 0;
+  transition: all 0.9s ease;
+}
+.reveal.zoom-in.in-view {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Zoom-out (reduzindo suavemente) */
+.reveal.zoom-out {
+  transform: scale(1.08);
+  opacity: 0;
+  transition: all 0.9s ease;
+}
+.reveal.zoom-out.in-view {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Fade diagonal (leve efeito 3D, para destaque) */
+.reveal.fade-diagonal {
+  transform: translate(40px, 40px);
+  opacity: 0;
+  transition: all 1s ease;
+}
+.reveal.fade-diagonal.in-view {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+/* ==========================================================
+   ANIMAÇÃO DOURADA (opcional para destaque)
+========================================================== */
+.reveal.in-view.gold-glow {
+  animation: goldPulse 1.2s ease forwards;
+}
+
+@keyframes goldPulse {
+  0% {
+    box-shadow: 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 transparent;
   }
 }
