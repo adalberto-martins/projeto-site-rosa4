@@ -1,251 +1,275 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Rosa — Atendimento domiciliar em unhas e cabelo. Agende pelo WhatsApp." />
-  <meta name="theme-color" content="#f7e7e0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ROSA — Unhas • Cabelo</title>
+<meta name="description" content="Rosa — Atendimento domiciliar em unhas e cabelo. Agende pelo WhatsApp." />
 
-  <title>ROSA — Unhas • Cabelo</title>
+<!-- Fonts -->
+ <script src="https://kit.fontawesome.com/e2c5db69a2.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- 🌐 FONTES (pré-conexão para performance) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/mediaquery.css">
 
-  <!-- 🎨 CSS PRINCIPAL -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/mediaquery.css">
-
-  <!-- 💾 SCRIPT (adiado para renderização mais rápida) -->
-  <script src="js/script.js" defer></script>
-
-  <!-- 🔖 ÍCONE -->
-  <link rel="icon" href="imagens/favicon.ico">
+<!-- Favicon -->
+<link rel="icon" href="imagens/favicon.ico" />
 </head>
-
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="ROSA — Unhas e Cabelo">
-        <img src="imagens/rosa-fundo-branco-logo.PNG" alt="ROSA logo" class="brand-logo" width="70" height="70" loading="lazy">
-        <div class="brand-text">
-          <h1>ROSA</h1>
-          <small>Unhas • Cabelo</small>
-        </div>
-      </a>
+<!-- HEADER -->
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a class="brand" href="#home" aria-label="ROSA — Unhas e Cabelo">
+      <img src="imagens/rosa-fundo-branco-logo.PNG" alt="ROSA logo" class="brand-logo">
+      <div class="brand-text">
+        <h1>ROSA</h1>
+        <small>Unhas • Cabelo</small>
+      </div>
+    </a>
 
-      <nav class="main-nav" aria-label="Menu principal">
-        <ul class="nav-list">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#galeria">Galeria</a></li>
-          <li><a href="#agendamento">Agendamento</a></li>
-          <li><a href="#depoimentos">Depoimentos</a></li>
-        </ul>
-      </nav>
+    <nav class="main-nav" role="navigation" aria-label="Menu principal">
+      <ul class="nav-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#agendamento">Agendamento</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+      </ul>
+    </nav>
 
-      <button id="btn-burger" class="btn-burger" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+    <button id="btn-burger" class="btn-burger" aria-label="Abrir menu" aria-expanded="false"><i class="fa-solid fa-bars" style="color: #FFD43B;"></i>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content reveal">
+      <h2>Beleza e confiança onde você estiver</h2>
+      <p class="lead">Serviços de unhas, corte, hidratação e mais. Escolha onde ser atendida: em nosso salão ou no seu endereço! Profissionalismo e cuidado em cada detalhe.</p>
+      <div class="hero-actions">
+        <a id="btn-whatsapp-hero" class="btn primary" href="https://wa.me/5519983557755" target="_blank" rel="noopener">Agende agora</a>
+        <a class="btn ghost" href="#galeria">Ver portfólio</a>
+      </div>
+      <ul class="destaques">
+        <li>💅 Unhas profissionais</li>
+        <li>💇‍♀️ Cortes & hidratações</li>
+        <li>🕒 Atendimento domiciliar</li>
+      </ul>
     </div>
-  </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content reveal fade-up">
-        <h2>Beleza e confiança onde você estiver</h2>
-        <p class="lead">Atendimento domiciliar especializado em unhas e cabelo — conforto e cuidado no seu lar.</p>
-        <div class="hero-actions">
-          <a id="btn-whatsapp-hero" class="btn primary" href="https://wa.me/5519983557755" target="_blank" rel="noopener">Agende agora</a>
-          <a class="btn ghost" href="#galeria">Ver portfólio</a>
-        </div>
-      </div>
-
-      <div class="hero-image reveal fade-left">
-        <img src="imagens/rosa.jpg" alt="Rosa atendendo cliente" width="450" height="500" loading="lazy">
-      </div>
+    <div class="hero-image reveal">
+      <!-- substitua pela imagem real: imagens/rosa-banner.png -->
+      <img src="imagens/rosa.jpg" alt="Rosa — Profissional" />
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SOBRE -->
-  <section id="sobre" class="section about">
-    <div class="container about-grid">
-      <div class="about-photo reveal fade-right">
-        <img src="imagens/rosa-perfil.jpg" alt="Rosa, profissional" width="350" height="400" loading="lazy">
-      </div>
-      <div class="about-text reveal fade-left">
-        <h3>Sobre a Rosa</h3>
-        <p>Sou Rosa, profissional dedicada em realçar a sua beleza. Atendo em domicílio com materiais profissionais, higiene e carinho — meu objetivo é que você se sinta confiante.</p>
-        <ul class="diferenciais">
-          <li>Atendimento em casa</li>
-          <li>Produtos profissionais</li>
-          <li>Horários flexíveis</li>
-        </ul>
-      </div>
+<!-- SOBRE -->
+<section id="sobre" class="section about">
+  <div class="container about-grid">
+    <div class="about-photo reveal">
+      <img src="imagens/rosa.jpg" alt="Rosa, profissional" />
     </div>
-  </section>
-
-  <!-- SERVIÇOS -->
-  <section id="servicos" class="section services">
-    <div class="container">
-      <h3 class="section-title reveal fade-up">Serviços</h3>
-      <div class="cards-grid">
-        <article class="card reveal fade-up">
-          <div class="card-icon">💅</div>
-          <h4>Unhas</h4>
-          <p>Manicure, pedicure, alongamento em gel, esmaltação e nail art sob medida.</p>
-        </article>
-
-        <article class="card reveal fade-up">
-          <div class="card-icon">💇‍♀️</div>
-          <h4>Cabelos</h4>
-          <p>Corte, escova, hidratação e tratamento profissional no conforto da sua casa.</p>
-        </article>
-
-        <article class="card reveal fade-up">
-          <div class="card-icon">✨</div>
-          <h4>Pacotes</h4>
-          <p>Combos especiais com descontos para datas e cuidados regulares.</p>
-        </article>
-      </div>
+    <div class="about-text reveal">
+      <h3>Sobre a Rosa</h3>
+      <p>Sou Rosa, profissional dedicada em realçar a sua beleza. Atendo em domicílio com materiais profissionais, higiene e carinho — meu objetivo é que você se sinta confiante.</p>
+      <ul class="diferenciais">
+        <li>Atendimento em casa</li>
+        <li>Produtos profissionais</li>
+        <li>Horários flexíveis</li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- GALERIA -->
-  <section id="galeria" class="section gallery">
-    <div class="container">
-      <h3 class="section-title reveal fade-up">Galeria</h3>
-      <div class="insta-grid">
-        <img src="imagens/galeria1.jpg" alt="Antes e Depois" class="reveal zoomable fade-up" loading="lazy">
-        <img src="imagens/galeria2.jpg" alt="Unhas decoradas" class="reveal zoomable fade-up" loading="lazy">
-        <img src="imagens/galeria3.jpg" alt="Cabelo tratado" class="reveal zoomable fade-up" loading="lazy">
-        <img src="imagens/galeria4.jpg" alt="Alongamento em gel" class="reveal zoomable fade-up" loading="lazy">
-      </div>
+<!-- SERVIÇOS -->
+<section id="servicos" class="section services">
+  <div class="container">
+    <h3 class="section-title reveal">Serviços</h3>
+    <div class="cards-grid">
+      <article class="card reveal fade-up">
+        <div class="card-icon">💅</div>
+        <h4>Unhas</h4>
+        <p>Manicure, pedicure, alongamento em gel, esmaltação e nail art sob medida.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon">💇‍♀️</div>
+        <h4>Cabelos</h4>
+        <p>Corte, escova, hidratação e tratamento profissional em sua casa.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon">✨</div>
+        <h4>Pacotes</h4>
+        <p>Combos para festas, aniversários e cuidado regular — pergunte sobre pacotes com desconto.</p>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- AGENDAMENTO -->
-  <section id="agendamento" class="section booking">
-    <div class="container booking-grid">
-      <div class="booking-form reveal fade-right">
-        <h3>Agende seu horário</h3>
-        <p>Escolha data e horário e confirme seu atendimento via WhatsApp.</p>
+<!-- GALERIA -->
+<section id="galeria" class="section gallery">
+  <div class="container">
+    <h3 class="section-title reveal">Galeria</h3>
+    <div class="insta-grid">
+      <img class="reveal fade-left zoomable" src="https://via.placeholder.com/600x600?text=Antes+Depois+1" alt="antes depois 1">
+      <img class="reveal fade-right zoomable" src="https://via.placeholder.com/600x600?text=Unhas+2" alt="unhas 2">
+      <img class="reveal zoom-in gold-glow zoomable" src="imagens/cabelo3.jpg" alt="cabelo 3">
+      <img class="reveal zoomable" src="https://via.placeholder.com/600x600?text=Portifolio" alt="portifolio">
+      <img class="reveal zoomable" src="https://via.placeholder.com/600x600?text=Unhas+4" alt="unhas 4">
+      <img class="reveal zoomable" src="https://via.placeholder.com/600x600?text=Cabelo+5" alt="cabelo 5">
+    </div>
+  </div>
+</section>
 
-        <form id="agendarForm" class="form" autocomplete="off">
-          <div class="row">
-            <div class="field">
-              <label for="nome">Nome</label>
-              <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
-            </div>
-            <div class="field">
-              <label for="telefone">WhatsApp</label>
-              <input id="telefone" name="telefone" type="tel" placeholder="(00) 9 0000-0000" required>
-            </div>
-          </div>
+<!-- AGENDAMENTO -->
+<section id="agendamento" class="section booking">
+  <div class="container booking-grid">
+    <div class="booking-form reveal">
+      <h3>Agende seu horário</h3>
+      <p>Escolha data e horário e Local. Vamos verificar a disponibilidade e confirmar pelo WhatsApp.</p>
 
-          <div class="row">
-            <div class="field">
-              <label for="servico">Serviço</label>
-              <select id="servico" name="servico" required>
-                <option value="">Selecione</option>
-                <option>Unhas</option>
-                <option>Cabelos</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="data">Data e hora</label>
-              <input id="data" name="data" type="datetime-local" required>
-            </div>
-          </div>
-
+      <form id="agendarForm" class="form" autocomplete="off">
+        <div class="row">
           <div class="field">
-            <label for="obs">Observações</label>
-            <textarea id="obs" name="obs" rows="3" placeholder="Endereço, preferências..."></textarea>
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
           </div>
-
-          <div class="form-actions">
-            <button id="btnSubmit" type="submit" class="btn primary">Agendar</button>
-            <button type="reset" class="btn ghost">Limpar</button>
+          <div class="field">
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input id="telefone" name="telefone" type="tel" placeholder="(00) 9 0000-0000" required>
           </div>
+        </div>
 
-          <div id="formMessage" class="form-message" aria-live="polite"></div>
-        </form>
+        <div class="row">
+          <div class="field">
+            <label for="servico">Serviço</label>
+            <select id="servico" name="servico" required>
+              <option value="">Selecione</option>
+              <option>Unhas</option>
+              <option>Cabelos</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="data">Data e hora</label>
+            <input id="data" name="data" type="datetime-local" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="obs">Observações</label>
+          <textarea id="obs" name="obs" rows="3" placeholder="Endereço, preferências..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button id="btnSubmit" type="submit" class="btn primary">Agendar</button>
+          <button type="reset" class="btn ghost">Limpar</button>
+        </div>
+
+        <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <aside class="booking-info reveal">
+      <div class="card info-card">
+        <h4>Como funciona</h4>
+        <ol>
+          <li>Escolha o serviço e dia/hora</li>
+          <li>Verificamos disponibilidade no Google Agenda</li>
+          <li>Confirmamos pelo WhatsApp</li>
+        </ol>
+        <p><strong>Tempo médio:</strong> 60–90 min</p>
+        <p><strong>Pagamento:</strong> Pix, crédito/débito ou dinheiro</p>
       </div>
 
-      <aside class="booking-info reveal fade-left">
-        <div class="card info-card">
-          <h4>Como funciona</h4>
-          <ol>
-            <li>Escolha o serviço e dia/hora</li>
-            <li>Enviaremos os detalhes via WhatsApp</li>
-            <li>Confirme e pronto!</li>
-          </ol>
-        </div>
+      <div class="card contact-card">
+        <h4>Contato rápido</h4>
+        <p>WhatsApp: <a id="wa-link" href="https://wa.me/5519983557755" target="_blank" rel="noopener">+55 (19) 98355-7755</a></p>
+        <p>Atendimento: Seg–Sáb • 09:00–19:00</p>
+      </div>
+    </aside>
+  </div>
+</section>
 
-        <div class="card contact-card">
-          <h4>Contato rápido</h4>
-          <p>WhatsApp: <a href="https://wa.me/5519983557755" target="_blank" rel="noopener">+55 (19) 98355-7755</a></p>
-          <p>Atendimento: Seg–Sáb • 09:00–19:00</p>
-        </div>
-      </aside>
+<!-- DEPOIMENTOS -->
+<section id="depoimentos" class="section testimonials">
+  <div class="container">
+    <h3 class="section-title reveal">Depoimentos</h3>
+    <div class="testimonials-grid">
+      <blockquote class="reveal">“A Rosa é maravilhosa! Atendimento com carinho e ótimo resultado.” <cite>— Camila</cite></blockquote>
+      <blockquote class="reveal">“Me surpreendi com a praticidade e acabamento. Recomendo!” <cite>— Juliana</cite></blockquote>
+      <blockquote class="reveal">“Pontual, simpática e profissional.” <cite>— Ana</cite></blockquote>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- DEPOIMENTOS -->
-  <section id="depoimentos" class="section testimonials">
+<!-- RODAPÉ -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <h4>ROSA — Unhas • Cabelo</h4>
+      <p>Atendimento com carinho e segurança  <span>VENHA NÓS CONHECER!!!!!</span>. Agende pelo WhatsApp.</p>
+      <a class="btn primary" id="footer-wa" href="https://wa.me/5519983557755" target="_blank" rel="noopener">Agendar via WhatsApp</a>
+    </div>
+
+    <div class="footer-links">
+      <h5>Links</h5>
+      <ul>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#agendamento">Agendamento</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-social">
+      <h5>Siga</h5>
+      <div class="socials">
+        <a href="https://instagram.com" target="_blank" rel="noopener"><i class="fa-brands fa-instagram" style="color: #FFD43B;"></i></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f" style="color: #FFD43B;"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAPA DE ATENDIMENTO (Piracicaba, SP) -->
+  <div class="footer-map container">
+    <h5>Atendimento</h5>
+    <p><SPAN>---->VENHA NOS VISITAR<----</SPAN></p>
+   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.2571480260704!2d-47.72821732505384!3d-22.681469329856558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c634ffd377b189%3A0xc35438f7d642f0d7!2sAv.%20Aureliano%20Fernandes%20de%20Ara%C3%BAjo%20Neto%20-%20Vale%20do%20Sol%2C%20Piracicaba%20-%20SP%2C%2013406-054%2C%20Brasil!5e0!3m2!1spt-BR!2sus!4v1761935225912!5m2!1spt-BR!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+
+  <div class="rota-btn">
+      <a href="https://www.google.com/maps/place/Av.+Aureliano+Fernandes+de+Ara%C3%BAjo+Neto+-+Vale+do+Sol,+Piracicaba+-+SP,+13406-054,+Brasil/@-22.681474,-47.725642,15z/data=!4m6!3m5!1s0x94c634ffd377b189:0xc35438f7d642f0d7!8m2!3d-22.6814743!4d-47.7256424!16s%2Fg%2F11cs9yq3m1?hl=pt-BR&entry=ttu&g_ep=EgoyMDI1MTAyOS4xIKXMDSoASAFQAw%3D%3D"
+      target="_blank"
+      class="btn-rota">
+      📍 Traçar rota no Google Maps
+      </a>
+  </div>
+
+  <div class="site-copyright">
     <div class="container">
-      <h3 class="section-title reveal fade-up">Depoimentos</h3>
-      <div class="testimonials-grid">
-        <blockquote class="reveal fade-up">“A Rosa é maravilhosa! Atendimento com carinho e ótimo resultado.” <cite>— Camila</cite></blockquote>
-        <blockquote class="reveal fade-up">“Me surpreendi com a praticidade e acabamento. Recomendo!” <cite>— Juliana</cite></blockquote>
-        <blockquote class="reveal fade-up">“Pontual, simpática e profissional.” <cite>— Ana</cite></blockquote>
-      </div>
-    </div>
-  </section>
+      <small>© <span id="ano"></span> ROSA — Unhas • Cabelo. Todos os direitos reservados.</small>
 
-  <!-- RODAPÉ -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-about">
-        <h4>ROSA — Unhas • Cabelo</h4>
-        <p>Atendimento domiciliar com carinho e segurança. Agende pelo WhatsApp.</p>
-      </div>
-
-      <div class="footer-links">
-        <h5>Links</h5>
-        <ul>
-          <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#galeria">Galeria</a></li>
-          <li><a href="#agendamento">Agendamento</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-social">
-        <h5>Siga</h5>
-        <div class="socials">
-          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="site-copyright">
-      <div class="container">
-        <small>© <span id="ano"></span> ROSA — Unhas • Cabelo. Todos os direitos reservados.</small>
-        <div class="creditos">
+      <div class="creditos">
           <p>Desenvolvido por</p>
           <a href="https://amdigital.net.br" target="_blank" rel="noopener">
-            <img src="imagens/logo-na-vertical.png" alt="Logo AMDigital" width="80" height="90" loading="lazy">
+          <img src="imagens/logo-na-vertical.png" alt="Logo AMDigital">
           </a>
-        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<!-- <script src="scripts/script.js"></script> -->
+ <script src="scripts/script.js"></script>
 
 </body>
 </html>
