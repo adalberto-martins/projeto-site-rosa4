@@ -1,127 +1,166 @@
 @charset "UTF-8";
 
-/* ==========================================================
-   MEDIA QUERY — RESPONSIVIDADE OTIMIZADA
-   (foco em telas pequenas primeiro, depois expansão)
-========================================================== */
+/* ===========================================================
+   MEDIA QUERY — ROSA • Unhas e Cabelo
+   Estrutura adaptada aos breakpoints padrão do projeto
+   =========================================================== */
 
-/* ==========================================================
-   Pequenas telas (até 600px) — celulares
-========================================================== */
-@media screen and (max-width: 600px) {
-
-  /* Header e Menu */
-  .nav-list {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: var(--branco);
-    flex-direction: column;
-    gap: 18px;
-    padding: 20px 0;
-    align-items: center;
-    box-shadow: var(--sombra-leve);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 900;
-  }
-
-  .nav-list.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .btn-burger {
-    display: flex;
-  }
-
-  /* HERO */
-  .hero {
-    text-align: center;
-    padding: 60px 0;
-  }
-
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-content h2 {
-    font-size: 1.8rem;
-  }
-
-  /* SOBRE */
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* GALERIA */
-  .insta-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-
-  /* AGENDAMENTO */
-  .form .row {
-    grid-template-columns: 1fr;
-  }
-
-  .booking-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .section-title {
-    font-size: 1.6rem;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
+/* ------------------------------
+   IMPRESSÃO
+------------------------------ */
+@media print {
+  * {
+    font-family: 'Courier New', Courier, monospace;
   }
 }
 
-/* ==========================================================
-   Telas médias — Tablets (600px até 992px)
-========================================================== */
-@media screen and (min-width: 601px) and (max-width: 992px) {
-  
-  /* HEADER */
+/* ------------------------------
+   PEQUENAS TELAS (até 768px)
+------------------------------ */
+@media screen and (max-width: 768px) {
+  /* MENU HAMBURGUER */
+  .main-nav {
+    position: relative;
+  }
+  .nav-list a {
+    color: var(--texto, #333);
+    padding: 10px 0;
+    text-decoration: none;
+    font-weight: 500;
+  }
   .btn-burger {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
   }
 
-  .nav-list {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: var(--branco);
-    flex-direction: column;
-    gap: 20px;
-    padding: 24px 0;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    box-shadow: var(--sombra-leve);
+  .btn-burger span {
+    height: 3px;
+    width: 100%;
+    background: var(--rosa-escuro, #c085a5);
+    border-radius: 3px;
     transition: all 0.3s ease;
   }
 
-  .nav-list.open {
+  /* Efeito ao abrir */
+  .btn-burger[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  .btn-burger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .btn-burger[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  /* MENU recolhido no mobile */
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    width: 220px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .main-nav.open {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;
     transform: translateY(0);
   }
 
-  .hero-grid {
+  .main-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .main-nav a {
+    color: #444;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .main-nav a:hover {
+    color: var(--rosa-escuro, #c085a5);
+  }
+
+  /* GRID E LAYOUT MOBILE */
+  .hero-grid,
+  .about-grid,
+  .booking-grid,
+  .footer-grid {
     grid-template-columns: 1fr;
   }
 
-  .about-grid {
+  .cards-grid {
     grid-template-columns: 1fr;
+  }
+
+  .insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lightbox .nav-btn { 
+    font-size: 32px;
+    padding: 6px 10px;
+  }
+  .lightbox .close-btn { 
+    font-size: 26px;
+  }
+  .lightbox .caption { 
+    font-size: 0.9em;
+    max-width: 90%; }
+  
+  @keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+}
+
+/* ------------------------------
+   TABLET (768px até 992px)
+------------------------------ */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .btn-burger {
+    display: none;
+  }
+
+  .main-nav {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    width: auto;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: center;
   }
 
   .cards-grid {
@@ -134,18 +173,30 @@
 
   .booking-grid {
     grid-template-columns: 1fr 320px;
+    align-items: start;
   }
 
-  .footer-grid {
+  .form .row {
     grid-template-columns: 1fr 1fr;
-    text-align: left;
+  }
+
+  .about-grid {
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+  }
+
+  .footer-map h5 {
+    font-size: 1.3rem; /* 🔹 Ainda maior em telas médias+ */
   }
 }
 
-/* ==========================================================
-   Telas grandes — Desktop (992px até 1200px)
-========================================================== */
+/* ------------------------------
+   DESKTOP (992px até 1200px)
+------------------------------ */
 @media screen and (min-width: 992px) and (max-width: 1200px) {
+  .btn-burger {
+    display: none;
+  }
 
   .main-nav {
     position: static;
@@ -163,13 +214,11 @@
   }
 
   .hero-grid {
-    grid-template-columns: 1fr 420px;
-    align-items: center;
+    grid-template-columns: 1fr 440px;
   }
 
-  .about-grid {
-    grid-template-columns: 300px 1fr;
-    gap: 28px;
+  .hero-content h2 {
+    font-size: 38px;
   }
 
   .cards-grid {
@@ -181,33 +230,41 @@
   }
 
   .footer-grid {
-    grid-template-columns: 1fr 180px 200px;
+    grid-template-columns: 1fr 200px 200px;
   }
 
   .brand-logo {
     width: 70px;
   }
+
+   .footer-map h5 {
+    font-size: 1.3rem; /* 🔹 Ainda maior em telas médias+ */
+  }
 }
 
-/* ==========================================================
-   Telas extragrandes — +1200px
-========================================================== */
+/* ------------------------------
+   GRANDES TELAS (acima de 1200px)
+------------------------------ */
 @media screen and (min-width: 1200px) {
+  .main-nav {
+    display: block;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr 520px;
+  }
+
   .container {
     max-width: 1280px;
   }
 
-  .hero-grid {
-    grid-template-columns: 1fr 500px;
-  }
-
   .footer-map iframe {
-    width: 420px;
-    height: 220px;
-    border-radius: 8px;
+    max-width: 420px;
+    height: 200px;
   }
 
-  .hero-content h2 {
-    font-size: 2.5rem;
+  .footer-map h5 {
+    font-size: 1.4rem; /* 🔹 Mais destaque em desktop */
+    color: var(--rosa-escuro);
   }
 }
