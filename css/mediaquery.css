@@ -181,8 +181,14 @@
   }
 
   .about-grid {
-    grid-template-columns: 260px 1fr;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .about-photo img {
+    margin: 0 auto;
   }
 
   .footer-map h5 {
@@ -221,6 +227,21 @@
     font-size: 38px;
   }
 
+  .about-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr; /* imagem + texto */
+    align-items: center;
+    gap: 32px;
+  }
+
+  .about-photo {
+    justify-self: center;
+  }
+
+  .about-text {
+    text-align: left;
+  }
+
   .cards-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -256,6 +277,21 @@
 
   .container {
     max-width: 1280px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr; /* imagem + texto */
+    align-items: center;
+    gap: 32px;
+  }
+
+  .about-photo {
+    justify-self: center;
+  }
+
+  .about-text {
+    text-align: left;
   }
 
   .footer-map iframe {
