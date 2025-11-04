@@ -249,6 +249,13 @@ a {
   margin-bottom:8px;
 }
 
+ul.diferenciais {
+  padding-top: 20px;
+  text-indent: 80px;
+  list-style-type: none;
+  line-height: 25px;
+}
+
 /* SERVICES */
 .cards-grid {
   display:grid;
