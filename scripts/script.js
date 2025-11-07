@@ -108,7 +108,8 @@ form?.addEventListener('submit', (e) => {
       nome,
       telefone,
       servico,
-      data,
+      data: new Date(data).toISOString(),
+
       obs
     })
   })
