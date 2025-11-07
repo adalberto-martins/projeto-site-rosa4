@@ -4,11 +4,10 @@
    🔹 Funções deste script:
    1️⃣ Menu hamburger (abrir/fechar)
    2️⃣ Animação scroll reveal com efeito em cascata
-   3️⃣ Formulário com envio direto ao WhatsApp
+   3️⃣ Formulário com envio direto ao WhatsApp e integração com n8n
    4️⃣ Lightbox para galeria de imagens
    5️⃣ Atualização automática do ano no rodapé
 ============================================================== */
-
 
 /* ==============================================================
    CONFIGURAÇÕES
@@ -23,7 +22,6 @@ const WHATSAPP_NUM = "5519983557755";
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-
 /* ==============================================================
    1️⃣ MENU HAMBURGUER (MOBILE)
 ============================================================== */
@@ -36,14 +34,12 @@ btnBurger?.addEventListener('click', () => {
   mainNav.classList.toggle('open');
 });
 
-// Corrige comportamento ao redimensionar
 window.addEventListener('resize', () => {
   if (window.innerWidth > 992) {
     mainNav.classList.remove('open');
     btnBurger.setAttribute('aria-expanded', 'false');
   }
 });
-
 
 /* ==============================================================
    2️⃣ SCROLL REVEAL — animações com efeito em cascata
@@ -52,7 +48,6 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       const el = entry.target;
-      // Adiciona atraso em cascata com base na ordem
       const index = Array.from($$('.reveal')).indexOf(el);
       el.style.transitionDelay = `${index * 0.08}s`; // 80ms entre elementos
       el.classList.add('in-view');
@@ -60,12 +55,10 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 
-// Observa todos os elementos .reveal
 $$('.reveal').forEach((el) => observer.observe(el));
 
-
 /* ==============================================================
-   3️⃣ FORMULÁRIO — ENVIO DIRETO PELO WHATSAPP
+   3️⃣ FORMULÁRIO — ENVIO PELO WHATSAPP + INTEGRAÇÃO N8N
 ============================================================== */
 const form = $('#agendarForm');
 const formMessage = $('#formMessage');
@@ -77,14 +70,14 @@ form?.addEventListener('submit', (e) => {
   btn.disabled = true;
   btn.textContent = 'Abrindo WhatsApp...';
 
-  // Captura os campos do formulário
+  // Captura campos
   const nome = $('#nome').value.trim();
   const telefone = $('#telefone').value.trim();
   const servico = $('#servico').value;
   const data = $('#data').value;
   const obs = $('#obs').value.trim();
 
-  // Validação simples
+  // Validação
   if (!nome || !telefone || !servico || !data) {
     formMessage.textContent = '⚠️ Preencha todos os campos obrigatórios.';
     formMessage.className = 'form-message error';
@@ -93,7 +86,7 @@ form?.addEventListener('submit', (e) => {
     return;
   }
 
-  // Monta mensagem formatada
+  // Monta mensagem para WhatsApp
   const mensagem = encodeURIComponent(
     `Olá, sou ${nome}.\n` +
     `Quero agendar:\n` +
@@ -103,11 +96,29 @@ form?.addEventListener('submit', (e) => {
     (obs ? `• Observações: ${obs}` : '')
   );
 
-  // Abre WhatsApp Web / Mobile
+  // Abre WhatsApp
   const waUrl = `https://wa.me/${WHATSAPP_NUM}?text=${mensagem}`;
   window.open(waUrl, '_blank');
 
-  // Feedback visual no formulário
+  // Envia dados para o n8n (Google Agenda)
+  fetch("https://n8n-render-1-eg09.onrender.com/webhook/agendar", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      nome,
+      telefone,
+      servico,
+      data,
+      obs
+    })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
+    console.log("✅ Dados enviados ao n8n:", res.status);
+  })
+  .catch(err => console.error("❌ Erro ao enviar para n8n:", err));
+
+  // Feedback visual
   formMessage.textContent = '✅ Solicitação enviada! A Rosa confirmará no WhatsApp.';
   formMessage.className = 'form-message success';
 
@@ -117,9 +128,8 @@ form?.addEventListener('submit', (e) => {
   btn.textContent = 'Agendar';
 });
 
-
 /* ==============================================================
-   4️⃣ LIGHTBOX — AMPLIAR IMAGENS DA GALERIA
+   4️⃣ LIGHTBOX — AMPLIAR IMAGENS
 ============================================================== */
 const lightbox = document.createElement('div');
 lightbox.id = 'lightbox';
@@ -134,7 +144,6 @@ document.body.appendChild(lightbox);
 const lightboxImg = lightbox.querySelector('img');
 const btnClose = lightbox.querySelector('.lightbox-close');
 
-// Ao clicar numa imagem da galeria com .zoomable
 $$('.zoomable').forEach((img) => {
   img.addEventListener('click', () => {
     lightboxImg.src = img.src;
@@ -142,7 +151,6 @@ $$('.zoomable').forEach((img) => {
   });
 });
 
-// Fecha lightbox (botão, clique fora ou ESC)
 btnClose.addEventListener('click', () => lightbox.classList.remove('active'));
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) lightbox.classList.remove('active');
@@ -151,23 +159,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') lightbox.classList.remove('active');
 });
 
-
 /* ==============================================================
    5️⃣ ANO AUTOMÁTICO NO RODAPÉ
 ============================================================== */
 $('#ano').textContent = new Date().getFullYear();
-
-// Envia dados para o n8n (Google Agenda)
-fetch("https://n8n-render-1-eg09.onrender.com/webhook/agendar", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    nome,
-    telefone,
-    servico,
-    data,
-    obs
-  })
-})
-.catch(err => console.error("Erro ao enviar para n8n:", err));
-
