@@ -101,7 +101,7 @@ form?.addEventListener('submit', (e) => {
   window.open(waUrl, '_blank');
 
   // Envia dados para o n8n (Google Agenda)
-  fetch("https://n8n-render-1-eg09.onrender.com/webhook/agendar", {
+  fetch("https://rosaunhascabelo.app.n8n.cloud/webhook-test/agendar", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
