@@ -83,7 +83,7 @@ form?.addEventListener("submit", async (e) => {
   const data = $("#data").value;
   const obs = $("#obs").value.trim();
 
-  // Validação simples
+  // Validação
   if (!nome || !telefone || !servico || !data) {
     formMessage.textContent = "⚠️ Preencha todos os campos obrigatórios.";
     formMessage.className = "form-message error";
@@ -92,6 +92,11 @@ form?.addEventListener("submit", async (e) => {
     return;
   }
 
+  // Define duração automática por tipo de serviço
+  let duracaoMinutos = 60; // padrão
+  if (servico.toLowerCase().includes("cabel")) duracaoMinutos = 90;
+  else if (servico.toLowerCase().includes("pacot")) duracaoMinutos = 120;
+
   // Monta mensagem para o WhatsApp
   const mensagem = encodeURIComponent(
     `Olá, sou ${nome}.\n` +
@@ -99,6 +104,7 @@ form?.addEventListener("submit", async (e) => {
       `• Serviço: ${servico}\n` +
       `• Data: ${new Date(data).toLocaleString("pt-BR")}\n` +
       `• Telefone: ${telefone}\n` +
+      `• Duração estimada: ${duracaoMinutos} minutos\n` +
       (obs ? `• Observações: ${obs}` : "")
   );
 
@@ -115,6 +121,7 @@ form?.addEventListener("submit", async (e) => {
         telefone,
         servico,
         data: new Date(data).toISOString(),
+        duracao: duracaoMinutos,
         obs,
       }),
     });
@@ -145,36 +152,4 @@ form?.addEventListener("submit", async (e) => {
 
 /* ==============================================================
    4️⃣ LIGHTBOX — GALERIA
-============================================================== */
-const lightbox = document.createElement("div");
-lightbox.id = "lightbox";
-lightbox.innerHTML = `
-  <div class="lightbox-content">
-    <img src="" alt="Imagem ampliada">
-    <button class="lightbox-close" aria-label="Fechar">&times;</button>
-  </div>
-`;
-document.body.appendChild(lightbox);
-
-const lightboxImg = lightbox.querySelector("img");
-const btnClose = lightbox.querySelector(".lightbox-close");
-
-$$(".zoomable").forEach((img) => {
-  img.addEventListener("click", () => {
-    lightboxImg.src = img.src;
-    lightbox.classList.add("active");
-  });
-});
-
-btnClose.addEventListener("click", () => lightbox.classList.remove("active"));
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) lightbox.classList.remove("active");
-});
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") lightbox.classList.remove("active");
-});
-
-/* ==============================================================
-   5️⃣ ANO AUTOMÁTICO NO RODAPÉ
-============================================================== */
-$("#ano").textContent = new Date().getFullYear();
+===========
