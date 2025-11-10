@@ -3,9 +3,9 @@
    ==============================================================
    🔹 Funções deste script:
    1️⃣ Menu hamburger (abrir/fechar)
-   2️⃣ Animação scroll reveal com efeito em cascata
-   3️⃣ Formulário com envio direto ao WhatsApp e integração com n8n
-   4️⃣ Lightbox para galeria de imagens
+   2️⃣ Animação scroll reveal
+   3️⃣ Formulário com envio ao WhatsApp + integração n8n (Google Calendar)
+   4️⃣ Lightbox para galeria
    5️⃣ Atualização automática do ano no rodapé
 ============================================================== */
 
@@ -13,8 +13,11 @@
    CONFIGURAÇÕES
 ============================================================== */
 
-// Número do WhatsApp da Rosa (sem +, sem espaços)
+// Número do WhatsApp (somente números, com DDI e DDD)
 const WHATSAPP_NUM = "5519983557755";
+
+// Endpoint do n8n (produção)
+const N8N_ENDPOINT = "https://rosaunhascabelo.app.n8n.cloud/webhook/agendar";
 
 /* ==============================================================
    FUNÇÕES AUXILIARES
@@ -23,117 +26,128 @@ const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 /* ==============================================================
-   1️⃣ MENU HAMBURGUER (MOBILE)
+   1️⃣ MENU HAMBURGER
 ============================================================== */
-const btnBurger = $('#btn-burger');
-const mainNav = $('.main-nav');
+const btnBurger = $("#btn-burger");
+const mainNav = $(".main-nav");
 
-btnBurger?.addEventListener('click', () => {
-  const expanded = btnBurger.getAttribute('aria-expanded') === 'true';
-  btnBurger.setAttribute('aria-expanded', String(!expanded));
-  mainNav.classList.toggle('open');
+btnBurger?.addEventListener("click", () => {
+  const expanded = btnBurger.getAttribute("aria-expanded") === "true";
+  btnBurger.setAttribute("aria-expanded", String(!expanded));
+  mainNav.classList.toggle("open");
 });
 
-window.addEventListener('resize', () => {
+window.addEventListener("resize", () => {
   if (window.innerWidth > 992) {
-    mainNav.classList.remove('open');
-    btnBurger.setAttribute('aria-expanded', 'false');
+    mainNav.classList.remove("open");
+    btnBurger.setAttribute("aria-expanded", "false");
   }
 });
 
 /* ==============================================================
-   2️⃣ SCROLL REVEAL — animações com efeito em cascata
+   2️⃣ SCROLL REVEAL
 ============================================================== */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const index = Array.from($$('.reveal')).indexOf(el);
-      el.style.transitionDelay = `${index * 0.08}s`; // 80ms entre elementos
-      el.classList.add('in-view');
-    }
-  });
-}, { threshold: 0.12 });
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const index = Array.from($$(".reveal")).indexOf(el);
+        el.style.transitionDelay = `${index * 0.08}s`;
+        el.classList.add("in-view");
+      }
+    });
+  },
+  { threshold: 0.12 }
+);
 
-$$('.reveal').forEach((el) => observer.observe(el));
+$$(".reveal").forEach((el) => observer.observe(el));
 
 /* ==============================================================
-   3️⃣ FORMULÁRIO — ENVIO PELO WHATSAPP + INTEGRAÇÃO N8N
+   3️⃣ FORMULÁRIO — WHATSAPP + N8N
 ============================================================== */
-const form = $('#agendarForm');
-const formMessage = $('#formMessage');
+const form = $("#agendarForm");
+const formMessage = $("#formMessage");
 
-form?.addEventListener('submit', (e) => {
+form?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const btn = $('#btnSubmit');
+  const btn = $("#btnSubmit");
   btn.disabled = true;
-  btn.textContent = 'Abrindo WhatsApp...';
+  btn.textContent = "Enviando...";
 
-  // Captura campos
-  const nome = $('#nome').value.trim();
-  const telefone = $('#telefone').value.trim();
-  const servico = $('#servico').value;
-  const data = $('#data').value;
-  const obs = $('#obs').value.trim();
+  // Captura dos campos
+  const nome = $("#nome").value.trim();
+  const telefone = $("#telefone").value.trim();
+  const servico = $("#servico").value;
+  const data = $("#data").value;
+  const obs = $("#obs").value.trim();
 
-  // Validação
+  // Validação simples
   if (!nome || !telefone || !servico || !data) {
-    formMessage.textContent = '⚠️ Preencha todos os campos obrigatórios.';
-    formMessage.className = 'form-message error';
+    formMessage.textContent = "⚠️ Preencha todos os campos obrigatórios.";
+    formMessage.className = "form-message error";
     btn.disabled = false;
-    btn.textContent = 'Agendar';
+    btn.textContent = "Agendar";
     return;
   }
 
-  // Monta mensagem para WhatsApp
+  // Monta mensagem para o WhatsApp
   const mensagem = encodeURIComponent(
     `Olá, sou ${nome}.\n` +
-    `Quero agendar:\n` +
-    `• Serviço: ${servico}\n` +
-    `• Data: ${new Date(data).toLocaleString('pt-BR')}\n` +
-    `• Telefone: ${telefone}\n` +
-    (obs ? `• Observações: ${obs}` : '')
+      `Quero agendar:\n` +
+      `• Serviço: ${servico}\n` +
+      `• Data: ${new Date(data).toLocaleString("pt-BR")}\n` +
+      `• Telefone: ${telefone}\n` +
+      (obs ? `• Observações: ${obs}` : "")
   );
 
-  // Abre WhatsApp
-  const waUrl = `https://wa.me/${WHATSAPP_NUM}?text=${mensagem}`;
-  window.open(waUrl, '_blank');
+  // Abre conversa no WhatsApp
+  window.open(`https://wa.me/${WHATSAPP_NUM}?text=${mensagem}`, "_blank");
 
-  // Envia dados para o n8n (Google Agenda)
-  fetch("https://n8n-render-1-eg09.onrender.com/webhook/agendar", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      nome,
-      telefone,
-      servico,
-      data: new Date(data).toISOString(),
+  // Envia dados para o n8n
+  try {
+    const res = await fetch(N8N_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nome,
+        telefone,
+        servico,
+        data: new Date(data).toISOString(),
+        obs,
+      }),
+    });
 
-      obs
-    })
-  })
-  .then(res => {
-    if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
-    console.log("✅ Dados enviados ao n8n:", res.status);
-  })
-  .catch(err => console.error("❌ Erro ao enviar para n8n:", err));
+    const json = await res.json().catch(() => ({}));
 
-  // Feedback visual
-  formMessage.textContent = '✅ Solicitação enviada! A Rosa confirmará no WhatsApp.';
-  formMessage.className = 'form-message success';
+    if (res.ok && json.status === "ok") {
+      formMessage.textContent = "✅ Agendamento criado com sucesso!";
+      formMessage.className = "form-message success";
+    } else if (json.status === "erro") {
+      formMessage.textContent = "❌ Horário indisponível. Escolha outro horário.";
+      formMessage.className = "form-message error";
+    } else {
+      formMessage.textContent = "⚠️ Erro ao registrar no sistema. Tente novamente.";
+      formMessage.className = "form-message error";
+    }
+  } catch (err) {
+    console.error("Erro ao enviar para n8n:", err);
+    formMessage.textContent = "🚫 Falha na conexão com o servidor.";
+    formMessage.className = "form-message error";
+  }
 
-  // Reseta o formulário
+  // Finaliza
   form.reset();
   btn.disabled = false;
-  btn.textContent = 'Agendar';
+  btn.textContent = "Agendar";
 });
 
 /* ==============================================================
-   4️⃣ LIGHTBOX — AMPLIAR IMAGENS
+   4️⃣ LIGHTBOX — GALERIA
 ============================================================== */
-const lightbox = document.createElement('div');
-lightbox.id = 'lightbox';
+const lightbox = document.createElement("div");
+lightbox.id = "lightbox";
 lightbox.innerHTML = `
   <div class="lightbox-content">
     <img src="" alt="Imagem ampliada">
@@ -142,25 +156,25 @@ lightbox.innerHTML = `
 `;
 document.body.appendChild(lightbox);
 
-const lightboxImg = lightbox.querySelector('img');
-const btnClose = lightbox.querySelector('.lightbox-close');
+const lightboxImg = lightbox.querySelector("img");
+const btnClose = lightbox.querySelector(".lightbox-close");
 
-$$('.zoomable').forEach((img) => {
-  img.addEventListener('click', () => {
+$$(".zoomable").forEach((img) => {
+  img.addEventListener("click", () => {
     lightboxImg.src = img.src;
-    lightbox.classList.add('active');
+    lightbox.classList.add("active");
   });
 });
 
-btnClose.addEventListener('click', () => lightbox.classList.remove('active'));
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) lightbox.classList.remove('active');
+btnClose.addEventListener("click", () => lightbox.classList.remove("active"));
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) lightbox.classList.remove("active");
 });
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') lightbox.classList.remove('active');
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") lightbox.classList.remove("active");
 });
 
 /* ==============================================================
    5️⃣ ANO AUTOMÁTICO NO RODAPÉ
 ============================================================== */
-$('#ano').textContent = new Date().getFullYear();
+$("#ano").textContent = new Date().getFullYear();
