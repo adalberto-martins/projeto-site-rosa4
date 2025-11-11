@@ -17,7 +17,7 @@
 const WHATSAPP_NUM = "5519983557755";
 
 // Endpoint do n8n (produção)
-const N8N_ENDPOINT = "https://rosaunhascabelo.app.n8n.cloud/proxy.php";
+const N8N_ENDPOINT = "https://rosaunhascabelo.free.nf/proxy.php";
 
 
 /* ==============================================================
