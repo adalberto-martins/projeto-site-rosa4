@@ -17,7 +17,8 @@
 const WHATSAPP_NUM = "5519983557755";
 
 // Endpoint do n8n (produção)
-const N8N_ENDPOINT = "https://rosaunhascabelo.app.n8n.cloud/webhook/agendar";
+const N8N_ENDPOINT = "https://rosaunhascabelo.app.n8n.cloud/proxy.php";
+
 
 /* ==============================================================
    FUNÇÕES AUXILIARES
@@ -102,7 +103,7 @@ form?.addEventListener("submit", async (e) => {
     `Olá, sou ${nome}.\n` +
       `Quero agendar:\n` +
       `• Serviço: ${servico}\n` +
-      `• Data: ${new Date(data).toLocaleString("pt-BR")}\n` +
+      `• Data: ${new Date(data + ":00Z").toLocaleString("pt-BR")}\n` +
       `• Telefone: ${telefone}\n` +
       `• Duração estimada: ${duracaoMinutos} minutos\n` +
       (obs ? `• Observações: ${obs}` : "")
@@ -152,4 +153,37 @@ form?.addEventListener("submit", async (e) => {
 
 /* ==============================================================
    4️⃣ LIGHTBOX — GALERIA
-===========
+===============================================================*/
+const lightbox = document.createElement("div");
+lightbox.id = "lightbox";
+lightbox.innerHTML = `
+  <div class="lightbox-content">
+    <img src="" alt="Imagem ampliada">
+    <button class="lightbox-close" aria-label="Fechar">&times;</button>
+  </div>
+`;
+document.body.appendChild(lightbox);
+
+const lightboxImg = lightbox.querySelector("img");
+const btnClose = lightbox.querySelector(".lightbox-close");
+
+$$(".zoomable").forEach((img) => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add("active");
+  });
+});
+
+btnClose.addEventListener("click", () => lightbox.classList.remove("active"));
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) lightbox.classList.remove("active");
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") lightbox.classList.remove("active");
+});
+
+/* ==============================================================
+   5️⃣ ANO AUTOMÁTICO NO RODAPÉ
+============================================================== */
+$("#ano").textContent = new Date().getFullYear();
+
